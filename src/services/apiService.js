@@ -1,4 +1,4 @@
-export function fetchRequest(url, method, body, token) {
+export default function fetchRequest(url, method, body, token) {
     return new Promise((resolve, reject) => {
         const requestData = {
             method: method,
