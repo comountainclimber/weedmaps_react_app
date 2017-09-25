@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/comountainclimber/weedmaps_react_app.git"
+    "url": "https://github.com/comountainclimber/weedmaps_react_app.git"
   },
   "author": "Maxwell Lasky",
   "dependencies": {
