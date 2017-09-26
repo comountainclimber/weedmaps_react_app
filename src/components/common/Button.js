@@ -1,9 +1,23 @@
 import React from 'react';
 
+import {colors} from '../../config.js'
+import './styles/Button.css'
+
 const Button = props => (
-    <button onClick={props.onClick}>
+    <button
+        className={`Button-base ${props.buttonStyle ? props.buttonStyle : ''}`}
+        style={props.additionalStyles}
+        onClick={props.onClick}
+    >
         {props.text}
     </button>
 );
 
-export default Button;
+export const DefaultButton = props => (
+    <Button {...props}/>
+);
+
+export const EmeraldButton = props => (
+    <Button {...props} additionalStyles={{backgroundColor: colors.emerald}}/>
+)
+

@@ -1,12 +1,14 @@
 import React from 'react';
-import Button from '../common/Button';
+
+import './styles/Dispensary.css'
+import {EmeraldButton} from '../common/Button';
 
 const Dispensary = props => (
-    <div>
+    <div className="Dispensary-row">
         <h1>
             {props.display}
         </h1>
-        <Button
+        <EmeraldButton
             text="View Menu"
             onClick={props.onClick}
         />

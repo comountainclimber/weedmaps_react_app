@@ -19,13 +19,16 @@ class App extends Component {
         return (
             <div className="App">
                 <AppHeader />
-                <p className="App-intro">
-                    Select from one of the dispensaries below to view their current inventory.
-                </p>
-                <DispensaryList
-                    dispensaries={integratedVendors}
-                    handleClick={dispensary => console.log(dispensary)}
-                />
+
+                <div className="App-content">
+                    <p className="App-intro">
+                        Select from one of the dispensaries below to view their current inventory.
+                    </p>
+                    <DispensaryList
+                        dispensaries={integratedVendors}
+                        handleClick={dispensary => console.log(dispensary)}
+                    />
+                </div>
             </div>
         );
     }

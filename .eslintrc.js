@@ -23,7 +23,6 @@ module.exports = {
     },
     "rules": {
         "strict": [0],
-        "import/prefer-default-export": [0],
         "no-multi-str": [0],
         "no-plusplus": [0],
         "no-underscore-dangle": [0],

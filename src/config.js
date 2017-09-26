@@ -6,3 +6,7 @@ export const integratedVendors = [
     }
 ];
 
+export const colors = {
+	darkGrey: '#222',
+	emerald: '#2ecc71'
+}
