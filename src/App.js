@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import leaf from './images/leaf.svg';
 import './styles/App.css';
 
+import DispensaryList from './components/dispensary/DispensaryList';
 import {fetchRequest} from './services/apiService';
 import {integratedVendors} from './config';
+
 
 class App extends Component {
 // componentWillMount() {
@@ -20,6 +22,10 @@ class App extends Component {
                 <p className="App-intro">
                     Select from one of the dispensaries below to view their current inventory.
                 </p>
+                <DispensaryList
+                    dispensaries={integratedVendors}
+                    handleClick={dispensary => console.log(dispensary)}
+                />
             </div>
         );
     }
