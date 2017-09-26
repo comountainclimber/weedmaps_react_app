@@ -14,10 +14,10 @@ const Button = props => (
 );
 
 export const DefaultButton = props => (
-    <Button {...props}/>
+    <Button {...props} />
 );
 
 export const EmeraldButton = props => (
     <Button {...props} additionalStyles={{backgroundColor: colors.emerald}}/>
-)
+);
 

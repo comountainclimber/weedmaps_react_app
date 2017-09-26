@@ -1,44 +1,42 @@
 import React, { Component } from 'react';
-import leaf from './images/leaf.svg';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    BrowserRouter
+} from 'react-router-dom';
+
 import './styles/App.css';
-
-import DispensaryList from './components/dispensary/DispensaryList';
-import {fetchRequest} from './services/apiService';
-import {integratedVendors} from './config';
-
+// import {integrationVendors} from './config';
+import DispensaryRouter from './components/router/DispensaryRouter';
+import Home from './components/home/Home';
+import leaf from './images/leaf.svg';
 
 class App extends Component {
-// componentWillMount() {
-//   fetchRequest('https://weedmaps.com/dispensaries/native-roots-apothecary/menu_items.json', 'GET')
-//     .then((result) => {
-//       console.log(result)
-//     })
-// }
-
     render() {
         return (
             <div className="App">
-                <AppHeader />
-
-                <div className="App-content">
-                    <p className="App-intro">
-                        Select from one of the dispensaries below to view their current inventory.
-                    </p>
-                    <DispensaryList
-                        dispensaries={integratedVendors}
-                        handleClick={dispensary => console.log(dispensary)}
-                    />
-                </div>
+                <Router history={BrowserRouter}>
+                    <div>
+                    <Route component={AppHeader} />
+                        <Switch>
+                            <Route exact path="/" component={Home} />
+                            <Route path="/dispensaries" component={DispensaryRouter} />
+                        </Switch>
+                    </div>
+                </Router>
             </div>
         );
     }
 }
 
-const AppHeader = () =>
+const AppHeader = (props) =>
     <div className="App-header">
-        <img src={leaf} className="App-logo" alt="logo" />
-        <h2>CannabisR</h2>
-        <h4 style={{fontWeight: 100}}>Real time inventory updates from your favorite dispensaries.</h4>
+        <div style={{cursor: 'pointer'}} onClick={() => props.history.push('/')}>
+            <img src={leaf} className="App-logo" alt="logo" />
+            <h2>CannabisR</h2>
+        </div>
+        <h4 style={{fontWeight: 100}}>Real time inventory updates from your favorite dispensaries</h4>
     </div>;
 
 export default App;

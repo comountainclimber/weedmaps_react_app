@@ -11,6 +11,14 @@
   text-align: center;
 }
 
+.App-header h2 {
+  margin: 5px;
+}
+
+.App-header h4 {
+  margin: 10px;
+}
+
 .App-intro {
   font-size: large;
 }
