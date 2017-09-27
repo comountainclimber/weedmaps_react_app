@@ -1,42 +1,31 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
-    BrowserRouter as Router,
+    Router,
     Switch,
     Route,
-    BrowserRouter
 } from 'react-router-dom';
 
 import './styles/App.css';
-// import {integrationVendors} from './config';
+
 import DispensaryRouter from './components/router/DispensaryRouter';
 import Home from './components/home/Home';
-import leaf from './images/leaf.svg';
+import Navigation from './components/navigation/Navigation';
+import Footer from './components/navigation/Footer';
+import history from './history';
 
-class App extends Component {
-    render() {
-        return (
-            <div className="App">
-                <Router history={BrowserRouter}>
-                    <div>
-                    <Route component={AppHeader} />
-                        <Switch>
-                            <Route exact path="/" component={Home} />
-                            <Route path="/dispensaries" component={DispensaryRouter} />
-                        </Switch>
-                    </div>
-                </Router>
-            </div>
-        );
-    }
-}
-
-const AppHeader = (props) =>
-    <div className="App-header">
-        <div style={{cursor: 'pointer'}} onClick={() => props.history.push('/')}>
-            <img src={leaf} className="App-logo" alt="logo" />
-            <h2>CannabisR</h2>
+const App = () => (
+    <div className="App">
+        <Navigation handleClick={() => history.push('/')} />
+        <div className="App-container">
+            <Router history={history}>
+                <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route path="/dispensaries" component={DispensaryRouter} />
+                </Switch>
+            </Router>
         </div>
-        <h4 style={{fontWeight: 100}}>Real time inventory updates from your favorite dispensaries</h4>
-    </div>;
+        <Footer />
+    </div>
+);
 
 export default App;

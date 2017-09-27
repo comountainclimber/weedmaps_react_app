@@ -1,53 +1,60 @@
 import React, { Component } from 'react';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    BrowserRouter
-} from 'react-router-dom';
 
-import {integratedVendors} from '../../config';
-import fetchRequest from '../../services/apiService';
-
+// import MenuTable from './MenuTable';'
+import MenuTableCustom from './MenuTableCustom';
+import {integratedVendors, colors} from '../../config';
+import {fetchMenuData} from '../../services/vendorService';
 import ContentContainer from '../common/ContentContainer';
-// import './styles/App.css';
-// import {integrationVendors} from './config';
-// import DispensaryRouter from './components/router/DispensaryRouter';
-// import Home from './components/home/Home';
-// import leaf from './images/leaf.svg';
+import './styles/Menu.css';
+
 
 class Menu extends Component {
     constructor(props) {
         super(props);
         this.state = {
             busy: true,
+            menuData: [],
+            error: false,
+            errorMessage: null,
+            vendor: {}
         };
+        this.init = _init.bind(this);
     }
 
     componentDidMount() {
-        // import {fetchRequest} from '../../services/apiService';
-        console.log(this.props)
-
         const vendor = integratedVendors
             .filter(_vendor => _vendor.internalUrl === this.props.location.pathname)[0];
-        fetchRequest(vendor.href, 'GET')
-            .then((result) => {
-                this.setState({
-                    vendorData: result,
-                    busy: false
-                });
-            });
+        this.init(vendor);
     }
 
     render() {
         return (
             <ContentContainer busy={this.state.busy}>
-                <code>
-                    {JSON.stringify(this.state.vendorData)}
-                </code>
+                <h1> {this.state.vendor.display} </h1>
+                <p style={{color: colors.emerald}}> Succesfully found {this.state.menuData.length} menu items! </p>
+                <MenuTableCustom data={this.state.menuData} />
             </ContentContainer>
         );
     }
 }
+
+function _init(vendor) {
+    fetchMenuData(vendor)
+        .then((result) => {
+            this.setState({
+                menuData: result,
+                busy: false,
+                vendor: vendor
+            });
+        })
+        .catch((error) => {
+            this.setState({
+                busy: false,
+                error: true,
+                errorMessage: error.message
+            });
+        });
+}
+
 
 export default Menu;

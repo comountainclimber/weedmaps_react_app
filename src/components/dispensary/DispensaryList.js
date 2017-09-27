@@ -1,17 +1,17 @@
 import React from 'react';
 
 import Dispensary from './Dispensary';
+import './styles/DispensaryList.css';
 
 const DispensaryList = props => (
-    <div>
-        {console.log(props)}
-        {props.dispensaries.map(dispensary =>
+    <div className="DispensaryList-container">
+        {props.dispensaries.map(dispensary => (
             <Dispensary
                 key={dispensary.id}
-                onClick={() => props.handleClick(dispensary)}
+                handleClick={() => props.handleClick(dispensary)}
                 {...dispensary}
             />
-        )}
+        ))}
     </div>
 );
 
