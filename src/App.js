@@ -8,6 +8,7 @@ import {
 import './styles/App.css';
 
 import DispensaryRouter from './components/router/DispensaryRouter';
+import RouteNotFound from './components/common/RouteNotFound';
 import Home from './components/home/Home';
 import Navigation from './components/navigation/Navigation';
 import Footer from './components/navigation/Footer';
@@ -21,6 +22,7 @@ const App = () => (
                 <Switch>
                     <Route exact path="/" component={Home} />
                     <Route path="/dispensaries" component={DispensaryRouter} />
+                    <Route component={RouteNotFound} />
                 </Switch>
             </Router>
         </div>

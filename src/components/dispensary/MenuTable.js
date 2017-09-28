@@ -6,12 +6,7 @@ const columns = [
     {
         header: 'Name',
         accessor: 'name',
-        filterMethod: (filter, row, column) => {
-            const id = filter.pivotId || filter.id;
-            return row[id] !== undefined
-              ? String(row[id]).toLowerCase().startsWith(filter.value.toLowerCase())
-              : true;
-        },
+        sortable: true,
         width: 150
     },
     {
@@ -73,7 +68,16 @@ const columns = [
     {
         header: 'Description',
         accessor: 'body',
-        width: 450
+        width: 450,
+        styles: {fontSize: 14}
+    },
+    {
+        header: 'Updated',
+        accessor: 'updated_at',
+        width: 100,
+        sortable: true,
+        format: 'DATE',
+        styles: {fontSize: 12}
     },
 ];
 

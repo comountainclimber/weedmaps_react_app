@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 
 import {integratedVendors} from '../../config';
+import RouteNotFound from '../common/RouteNotFound';
 import Menu from '../dispensary/Menu';
 
 export default function DispensaryRouter(props) {
@@ -13,11 +14,13 @@ export default function DispensaryRouter(props) {
         <Switch>
             {integratedVendors.map(vendor => (
                 <Route
+                    exact
                     key={vendor.id}
                     path={vendor.internalUrl}
                     component={Menu}
                 />
             ))}
+            <Route component={RouteNotFound} />
         </Switch>
     );
 }

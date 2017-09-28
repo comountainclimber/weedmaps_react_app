@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import lunr from 'lunr';
+import moment from 'moment';
 
 import Pagination from './Pagination';
 import {colors} from '../../config';
@@ -138,21 +139,21 @@ const TableBody = ({data, columns}) => (
             data.map((_data) => {
                 // reduce the object to an array of only the requested key value pairs
                 const reduced = columns.map(column => (
-                    {accessor: column.accessor, format: column.format}
+                    {accessor: column.accessor, format: column.format, styles: column.styles}
                 ))
                     .map(_reducedData => ({
                         accessor: _reducedData.accessor,
                         [_reducedData.accessor]: _data[_reducedData.accessor],
-                        format: _reducedData.format
-                    })
-                );
+                        format: _reducedData.format,
+                        styles: _reducedData.styles
+                    }));
 
                 return (
                     <tr key={_data.id}>
                         {
                             reduced.map((value, i) => (
                                 <td key={i}>
-                                    <div style={{maxHeight: 100, overflow: 'auto'}}>
+                                    <div style={{maxHeight: 100, overflow: 'auto', ...value.styles}}>
                                         {_formatIndividualCellData(value)}
                                     </div>
                                 </td>
@@ -207,8 +208,11 @@ function _formatIndividualCellData(data) {
         return formatted[formatted.accessor];
     }
     case 'DATE': {
+        if (!formatted[formatted.accessor]) return '-';
+        const formattedDate = moment(formatted[formatted.accessor])
+            .format('MMMM Do YYYY, h:mm A');
         // 'do other stuff'
-        return formatted[formatted.accessor];
+        return formattedDate;
     }
     default: {
         return formatted[formatted.accessor];
@@ -272,16 +276,32 @@ function sortColumn(accessor) {
     });
 
     function increasing(a, b) {
+        if (isNaN(a[accessor])) {
+            if (a[accessor].toLowerCase() < b[accessor].toLowerCase()) return -1;
+            if (a[accessor].toLowerCase() > b[accessor].toLowerCase()) return 1;
+            return 0;
+        }
+        if (a[accessor === 'updated_at']) {
+            return byDateIncreasing(a, b);
+        }
         return (parseFloat(a[accessor]) - parseFloat(b[accessor]));
     }
     function decreasing(a, b) {
+        if (isNaN(a[accessor])) {
+            if (a[accessor].toLowerCase() > b[accessor].toLowerCase()) return -1;
+            if (a[accessor].toLowerCase() < b[accessor].toLowerCase()) return 1;
+            return 0;
+        }
+        if (a[accessor === 'updated_at']) {
+             return byDateDecreasing(a, b);
+        }
         return (parseFloat(b[accessor]) - parseFloat(a[accessor]));
     }
     function byDateIncreasing(a, b) {
-
+        return new Date(b.updated_at) - new Date(a.date.updated_at);
     }
     function byDateDecreasing(a, b) {
-
+        return new Date(a.updated_at) - new Date(b.date.updated_at);
     }
 
     const initedIndex = this.props.data.map((e, i) => ({index: i, [accessor]: e[accessor] }));

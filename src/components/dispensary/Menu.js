@@ -31,7 +31,9 @@ class Menu extends Component {
         return (
             <ContentContainer busy={this.state.busy}>
                 <h1> {this.state.vendor.display} </h1>
-                <p style={{color: colors.emerald}}> Succesfully found {this.state.menuData.length} menu items! </p>
+                <p style={{color: colors.emerald}}>
+                    Succesfully found {this.state.menuData.length} menu items!
+                </p>
                 <MenuTable data={this.state.menuData} />
             </ContentContainer>
         );
