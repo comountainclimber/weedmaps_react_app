@@ -7,9 +7,9 @@ import {fetchVendorData} from '../../services/vendorService';
 import './styles/Dispensary.css';
 
 
-const propTypes = {
+const dispensaryPropTypes = {
     display: PropTypes.string,
-    handleClick: PropTypes.function
+    handleClick: PropTypes.func
 };
 class Dispensary extends Component {
     constructor(props) {
@@ -17,7 +17,7 @@ class Dispensary extends Component {
         this.state = {
             loadingVendorData: true
         };
-        this.init = _init.bind(this);
+        this.init = init.bind(this);
     }
 
     componentDidMount() {
@@ -44,7 +44,12 @@ class Dispensary extends Component {
         );
     }
 }
+Dispensary.propTypes = dispensaryPropTypes;
 
+const detailsPropTypes = {
+    loadingVendorData: PropTypes.bool,
+    vendorData: PropTypes.object
+};
 const Details = props => (
     <div>
         {props.loadingVendorData && <div> Fetching vendor data... </div>}
@@ -59,8 +64,8 @@ const Details = props => (
                                 {props.vendorData.phone_number}
                             </a>
                         </div>
-                        <div> Address: {`${props.vendorData.address}, ${props.vendorData.city} ${props.vendorData.state} \
-    ${props.vendorData.zip_code}`}
+                        <div> Address: {`${props.vendorData.address}, ${props.vendorData.city} \
+${props.vendorData.state} ${props.vendorData.zip_code}`}
                         </div>
                         <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
                             Rating: <StarRating rating={props.vendorData.rating} />
@@ -71,8 +76,9 @@ const Details = props => (
         )}
     </div>
 );
+Details.propTypes = detailsPropTypes;
 
-function _init(vendor) {
+function init(vendor) {
     fetchVendorData(vendor)
         .then((result) => {
             this.setState({
@@ -88,7 +94,5 @@ function _init(vendor) {
             });
         });
 }
-
-Dispensary.propTypes = propTypes;
 
 export default Dispensary;

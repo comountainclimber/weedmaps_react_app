@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import Table from '../common/Table';
-import SearchBar from '../common/SearchBar';
 
 const columns = [
     {
@@ -81,6 +82,9 @@ const columns = [
     },
 ];
 
+const propTypes = {
+    data: PropTypes.array.isRequired
+};
 const MenuTable = props => (
     <div style={{minHeight: 750}}>
         <Table
@@ -93,5 +97,6 @@ const MenuTable = props => (
         />
     </div>
 );
+MenuTable.propTypes = propTypes;
 
 export default MenuTable;

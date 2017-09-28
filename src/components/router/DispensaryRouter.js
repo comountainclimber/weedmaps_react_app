@@ -9,7 +9,6 @@ import RouteNotFound from '../common/RouteNotFound';
 import Menu from '../dispensary/Menu';
 
 export default function DispensaryRouter(props) {
-    console.log('rendering DispensaryRouter', props);
     return (
         <Switch>
             {integratedVendors.map(vendor => (

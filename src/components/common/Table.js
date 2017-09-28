@@ -153,7 +153,13 @@ const TableBody = ({data, columns}) => (
                         {
                             reduced.map((value, i) => (
                                 <td key={i}>
-                                    <div style={{maxHeight: 100, overflow: 'auto', ...value.styles}}>
+                                    <div
+                                        style={{
+                                            maxHeight: 100,
+                                            overflow: 'auto',
+                                            ...value.styles
+                                        }}
+                                    >
                                         {_formatIndividualCellData(value)}
                                     </div>
                                 </td>

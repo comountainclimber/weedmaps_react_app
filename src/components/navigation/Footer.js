@@ -4,7 +4,7 @@ import octocat from '../../images/octocat.png';
 
 import './styles/Footer.css';
 
-const Footer = props => (
+const Footer = () => (
     <div className="Footer-container" style={{backgroundColor: colors.lightGrey}}>
         <a href="https://github.com/comountainclimber/weedmaps_react_app" target="blank">
             <img src={octocat} className="Footer-social-icon" alt="octocat" />

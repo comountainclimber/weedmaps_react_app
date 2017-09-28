@@ -18,7 +18,7 @@ class Menu extends Component {
             errorMessage: null,
             vendor: {}
         };
-        this.init = _init.bind(this);
+        this.init = init.bind(this);
     }
 
     componentDidMount() {
@@ -40,7 +40,7 @@ class Menu extends Component {
     }
 }
 
-function _init(vendor) {
+function init(vendor) {
     fetchMenuData(vendor)
         .then((result) => {
             this.setState({

@@ -1,15 +1,19 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ContentContainer from './ContentContainer';
 
+const propTypes = {
+    location: PropTypes.object
+};
 const RouteNotFound = ({ location }) => (
     <ContentContainer>
         <div>
             <h1>Whoops!</h1>
             <h3>
                 Looks like something went wrong. Please contact{' '}
-                    <a href= "mailto:mlasky46@com.com?Subject=Awesome%20Job!">
-                        mlasky46@com.com
-                    </a>
+                <a href= "mailto:mlasky46@com.com?Subject=Awesome%20Job!">
+                    mlasky46@com.com
+                </a>
                 {' '}if you think this is in error.
                 <br />
                 <br />
@@ -18,5 +22,6 @@ const RouteNotFound = ({ location }) => (
         </div>
     </ContentContainer>
 );
+RouteNotFound.propTypes = propTypes;
 
 export default RouteNotFound;

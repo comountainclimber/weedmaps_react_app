@@ -4,6 +4,12 @@ import PropTypes from 'prop-types';
 import {PaginationButton} from './Button';
 
 const LIMIT = 10;
+const paginationPropTypes = {
+    collectionLength: PropTypes.number,
+    limitPerPage: PropTypes.number,
+    handleClick: PropTypes.func,
+    position: PropTypes.number
+};
 class Pagination extends Component {
     constructor(props) {
         super(props);
@@ -55,20 +61,29 @@ class Pagination extends Component {
         );
     }
 }
+Pagination.propTypes = paginationPropTypes;
 
+const forwardButtonPropTypes = {
+    handleClick: PropTypes.func.isRequired
+};
 const ForwardButton = props => (
     <PaginationButton
         text=" ⇨ "
         onClick={props.handleClick}
     />
 );
+ForwardButton.propTypes = forwardButtonPropTypes;
 
+const backButtonPropTypes = {
+    handleClick: PropTypes.func.isRequired
+};
 const BackButton = props => (
     <PaginationButton
         text=" ⇦ "
         onClick={props.handleClick}
     />
 );
+BackButton.propTypes = backButtonPropTypes;
 
 function changePosition(action) {
     function _increase(state) {
