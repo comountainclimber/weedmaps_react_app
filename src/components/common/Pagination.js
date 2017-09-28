@@ -4,19 +4,19 @@ import PropTypes from 'prop-types';
 import {PaginationButton} from './Button';
 
 const LIMIT = 10;
-
 class Pagination extends Component {
     constructor(props) {
         super(props);
         this.state = {
             paginationPosition: 1,
             pagination: [],
-            reducedPagination: []
+            reducedPagination: [],
+            collectionLength: this.props.collectionLength
         };
 
-        this.reducePagination = _reducePagination.bind(this);
-        this.changePosition = _changePosition.bind(this);
-        this.setPagination = _setPagination.bind(this);
+        this.reducePagination = reducePagination.bind(this);
+        this.changePosition = changePosition.bind(this);
+        this.setPagination = setPagination.bind(this);
     }
 
     componentWillMount() {
@@ -25,13 +25,20 @@ class Pagination extends Component {
 
 
     componentWillReceiveProps(nextProps) {
-        this.setPagination(nextProps.limitPerPage);
+        if (nextProps.collectionLength !== this.state.collection) {
+            return this.setState({collectionLength: nextProps.collectionLength}, () =>
+                this.setPagination(nextProps.limitPerPage)
+            );
+        }
+        return this.setPagination(nextProps.limitPerPage);
     }
 
     render() {
         return (
             <div>
-                {(this.state.paginationPosition > 1) && <BackButton handleClick={this.changePosition} />}
+                {(this.state.paginationPosition > 1) &&
+                    <BackButton handleClick={this.changePosition} />
+                }
                 {this.state.reducedPagination.map(page => (
                     <PaginationButton
                         key={page.pageNumber}
@@ -40,7 +47,8 @@ class Pagination extends Component {
                         onClick={() => this.props.handleClick(page.pageNumber)}
                     />
                 ))}
-                {((this.state.paginationPosition < Math.ceil(this.state.pagination.length / LIMIT)) && this.state.reduced)
+                {((this.state.paginationPosition <
+                    Math.ceil(this.state.pagination.length / LIMIT)) && this.state.reduced)
                     && <ForwardButton handleClick={() => this.changePosition({increase: true})} />
                 }
             </div>
@@ -62,7 +70,7 @@ const BackButton = props => (
     />
 );
 
-function _changePosition(action) {
+function changePosition(action) {
     function _increase(state) {
         return ({
             paginationPosition: state.paginationPosition + 1
@@ -76,8 +84,8 @@ function _changePosition(action) {
     this.setState(action.increase ? _increase : _decrease, () => this.reducePagination());
 }
 
-function _setPagination(limitPerPage) {
-    const length = Math.ceil(this.props.collectionLength / limitPerPage);
+function setPagination(limitPerPage) {
+    const length = Math.ceil(this.state.collectionLength / limitPerPage);
     const pagination = [];
     for (let i = 1; i <= length; i++) {
         pagination.push({
@@ -90,7 +98,7 @@ function _setPagination(limitPerPage) {
     }, () => this.reducePagination());
 }
 
-function _reducePagination() {
+function reducePagination() {
     if (this.state.pagination.length <= LIMIT) {
         return (
             this.setState({reducedPagination: this.state.pagination})

@@ -1,12 +1,10 @@
 import React from 'react';
-import ReactTable from 'react-table';
-import 'react-table/react-table.css';
-
-import {currencyFormatter} from '../../services/vendorService';
+import Table from '../common/Table';
+import SearchBar from '../common/SearchBar';
 
 const columns = [
     {
-        Header: 'Name',
+        header: 'Name',
         accessor: 'name',
         filterMethod: (filter, row, column) => {
             const id = filter.pivotId || filter.id;
@@ -14,72 +12,82 @@ const columns = [
               ? String(row[id]).toLowerCase().startsWith(filter.value.toLowerCase())
               : true;
         },
+        width: 150
     },
     {
-        Header: '1 Unit',
+        header: '1 Unit',
         accessor: 'price_unit',
         width: 75,
-        filterable: false
+        sortable: true,
+        format: 'CURRENCY'
     },
     {
-        Header: '1/2 Gram',
+        header: '1/2 Gram',
         accessor: 'price_half_gram',
         width: 75,
-        filterable: false
+        sortable: true,
+        format: 'CURRENCY'
     },
     {
-        Header: '1 Gram',
+        header: '1 Gram',
         accessor: 'price_gram',
         width: 75,
-        filterable: false
+        sortable: true,
+        format: 'CURRENCY'
     },
     {
-        Header: '2 Grams',
+        header: '2 Grams',
         accessor: 'price_two_grams',
         width: 75,
-        filterable: false
+        sortable: true,
+        format: 'CURRENCY'
     },
     {
-        Header: '1 Eighth',
+        header: '1 Eighth',
         accessor: 'price_eighth',
         width: 75,
-        filterable: false
+        sortable: true,
+        format: 'CURRENCY'
     },
     {
-        Header: '1 Quarter',
+        header: '1 Quarter',
         accessor: 'price_quarter',
         width: 75,
-        filterable: false
+        sortable: true,
+        format: 'CURRENCY'
     },
     {
-        Header: 'Half Ounce',
+        header: 'Half Ounce',
         accessor: 'price_half_ounce',
         width: 75,
-        filterable: false
+        sortable: true,
+        format: 'CURRENCY'
     },
     {
-        Header: 'Ounce',
+        header: 'Ounce',
         accessor: 'price_ounce',
         width: 75,
-        filterable: false
+        sortable: true,
+        format: 'CURRENCY'
     },
     {
-        Header: 'Description',
+        header: 'Description',
         accessor: 'body',
-        width: 450,
-        filterable: false
+        width: 450
     },
 ];
 
 const MenuTable = props => (
-    <ReactTable
-        filterable
-        data={props.data}
-        columns={columns.map((column, i) => {
-            column.id = i;
-            return column;
-        })}
-    />
+    <div style={{minHeight: 750}}>
+        <Table
+            filterable
+            data={props.data}
+            columns={columns.map((column, i) => {
+                column.id = i;
+                return column;
+            })}
+        />
+    </div>
 );
 
 export default MenuTable;

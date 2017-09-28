@@ -1,3 +1,5 @@
+button:focus {outline:0;}
+
 .Button-base {
 	height: 35px;
 	width: 150px;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 // import MenuTable from './MenuTable';'
-import MenuTableCustom from './MenuTableCustom';
+import MenuTable from './MenuTable';
 import {integratedVendors, colors} from '../../config';
 import {fetchMenuData} from '../../services/vendorService';
 import ContentContainer from '../common/ContentContainer';
@@ -32,7 +32,7 @@ class Menu extends Component {
             <ContentContainer busy={this.state.busy}>
                 <h1> {this.state.vendor.display} </h1>
                 <p style={{color: colors.emerald}}> Succesfully found {this.state.menuData.length} menu items! </p>
-                <MenuTableCustom data={this.state.menuData} />
+                <MenuTable data={this.state.menuData} />
             </ContentContainer>
         );
     }
