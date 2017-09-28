@@ -60,18 +60,20 @@ class Table extends Component {
                         }
                     />
                 </div>
-                <table className="table table-hover">
-                    <ThGenerator
-                        columns={this.state.columns}
-                        sortColumnFunc={this.sortColumn}
-                    />
-                    {!!this.state.data.length &&
-                        <TableBody
-                            data={_limitData(this.state.data, this.state)}
+                <div className="table-container">
+                    <table className="table table-hover">
+                        <ThGenerator
                             columns={this.state.columns}
+                            sortColumnFunc={this.sortColumn}
                         />
-                    }
-                </table>
+                        {!!this.state.data.length &&
+                            <TableBody
+                                data={_limitData(this.state.data, this.state)}
+                                columns={this.state.columns}
+                            />
+                        }
+                    </table>
+                </div>
                 {this.state.limitPerPage < this.state.collectionLength &&
                     <div style={{textAlign: 'center'}}>
                         <Pagination
@@ -149,7 +151,7 @@ const TableBody = ({data, columns}) => (
                     }));
 
                 return (
-                    <tr key={_data.id}>
+                    <tr key={_data.id} style={{minHeight: 30}}>
                         {
                             reduced.map((value, i) => (
                                 <td key={i}>

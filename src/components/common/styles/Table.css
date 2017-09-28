@@ -6,6 +6,13 @@
   background-color: transparent;
 }
 
+.table-container {
+  min-height: 575px;
+  max-height: 575px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 .table th,
 .table td {
   padding: 0.75rem;
