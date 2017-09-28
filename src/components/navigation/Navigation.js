@@ -10,7 +10,7 @@ const Navigation = props => (
             <h2>CannabisR</h2>
         </div>
         <h4 style={{fontWeight: 100}}>
-            Real time inventory updates from your favorite dispensaries
+            View the current offerings at your favorite dispensaries
         </h4>
     </div>
 );

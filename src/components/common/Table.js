@@ -26,7 +26,6 @@ class Table extends Component {
     }
 
     render() {
-        console.log(this.state.data[0])
         return (
             <div>
                 <div style={{marginBottom: 10}}>
@@ -44,7 +43,7 @@ class Table extends Component {
                         }
                     />
                 </div>
-                <table className="table table-bordered table-hover">
+                <table className="table table-hover table-responsive table-responsive-md">
                     <ThGenerator
                         columns={this.state.columns}
                         sortColumn={this.sortColumn}
@@ -69,7 +68,7 @@ class Table extends Component {
 }
 
 const ThGenerator = ({columns, sortColumn}) => (
-    <thead>
+    <thead className="header">
         <tr>
             {columns.map(column => (
                 <th
@@ -81,14 +80,14 @@ const ThGenerator = ({columns, sortColumn}) => (
                     }}
                     style={{width: column.width, cursor: column.sortable ? 'pointer' : 'default'}}
                 >
-                    <div style={{display: 'flex', flexDirection: 'row'}}>
+                    <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
                         {column.header}
                         {column.sorting && column.ascending &&
-                            <div style={{fontSize: 10, marginLeft: 2}}>
+                            <div style={{fontSize: 10, marginLeft: 5}}>
                                 ▲
                             </div>
                         } {column.sorting && !column.ascending &&
-                            <div style={{fontSize: 10, marginLeft: 2}}>
+                            <div style={{fontSize: 10, marginLeft: 5}}>
                                 ▼
                             </div>
                         }
@@ -140,7 +139,7 @@ const NumberPerPageDropDown = props => (
         >
             <option value="5">5</option>
             <option value="10">10</option>
-            <option value="25">15</option>
+            <option value="25">25</option>
         </select>
     </div>
 );

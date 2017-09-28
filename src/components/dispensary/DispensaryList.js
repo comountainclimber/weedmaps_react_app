@@ -4,7 +4,7 @@ import Dispensary from './Dispensary';
 import './styles/DispensaryList.css';
 
 const DispensaryList = props => (
-    <div className="DispensaryList-container">
+    <div>
         {props.dispensaries.map(dispensary => (
             <Dispensary
                 key={dispensary.id}

@@ -9,9 +9,10 @@ class Home extends Component {
     render() {
         return (
             <ContentContainer>
-                <p style={{fontSize: 'large'}}>
+                {/*<p style={{fontSize: 'large'}}>
                     Select from one of the dispensaries below to view their current inventory:
-                </p>
+                </p> */
+                }
                 <DispensaryList
                     dispensaries={integratedVendors}
                     handleClick={dispensary =>
